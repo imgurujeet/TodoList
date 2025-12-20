@@ -13,6 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.imgurujeet.todolist.todoApp.ui.navigation.AppNavHost
+import com.imgurujeet.todolist.todoApp.ui.theme.TodoAppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -23,7 +26,11 @@ import todolist.composeapp.generated.resources.compose_multiplatform
 @Preview
 fun App() {
     initKoin()
-    MaterialTheme {
+    TodoAppTheme {
+
+        val navController = rememberNavController()
+
+        AppNavHost(navController = navController)
 
     }
 }
