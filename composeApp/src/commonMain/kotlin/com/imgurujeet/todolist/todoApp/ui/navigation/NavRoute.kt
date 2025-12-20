@@ -10,6 +10,9 @@ sealed class NavRoute{
     data object SplashScreen : NavRoute()
 
     @Serializable
+    data object OnBoardingScreen : NavRoute()
+
+    @Serializable
     data object DashBoard : NavRoute()
 
     @Serializable

@@ -9,16 +9,18 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.imgurujeet.todolist.todoApp.ui.screens.OnBoardingScreen
+import com.imgurujeet.todolist.todoApp.ui.screens.TodoBackgroundScreen
 
 @Composable
-fun AppNavHost(startDestination: NavRoute= NavRoute.SplashScreen, navController: NavHostController)  {
+fun AppNavHost(startDestination: NavRoute= NavRoute.OnBoardingScreen, navController: NavHostController)  {
 
     NavHost(
         navController = navController,
         startDestination = startDestination
     ){
-        composable<NavRoute.SplashScreen> {
-            SplashScreen()
+        composable<NavRoute.OnBoardingScreen> {
+            OnBoardingScreen()
 
         }
         composable<NavRoute.DashBoard> {
