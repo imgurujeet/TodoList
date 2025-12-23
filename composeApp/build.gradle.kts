@@ -13,6 +13,13 @@ plugins {
     alias(libs.plugins.serialization)
 }
 
+compose {
+    resources {
+        publicResClass = true
+    }
+}
+
+
 kotlin {
     androidTarget {
         compilerOptions {
@@ -69,6 +76,7 @@ kotlin {
             implementation(libs.koin.compose)
             //navigation
             implementation(libs.navigation.compose)
+
 
 
 

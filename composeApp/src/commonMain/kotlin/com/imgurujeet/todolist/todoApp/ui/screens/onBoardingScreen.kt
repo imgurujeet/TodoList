@@ -146,8 +146,6 @@ fun OnBoardingScreen(){
                         text = "Let's Start",
                         modifier = Modifier.fillMaxWidth()
                     )
-
-
                 }
             }
         }
@@ -311,7 +309,6 @@ fun BoxWithConstraintsScope.FloatingElements(
     BlurredCircles(Color(0x52746500), (-28).dp, maxHeight.value.div(5).dp, 60.dp)
     BlurredCircles(Color(0x2502BF04), maxWidth.value.dp-160.dp, 0.dp, 100.dp)
 
-
 }
 
 @Composable
@@ -387,7 +384,6 @@ fun TabletDarkPreview() {
     }
 }
 
-
 @Preview(
     name = "Desktop",
     widthDp = 1440,
@@ -400,7 +396,6 @@ fun DesktopPreview() {
         OnBoardingScreen()
     }
 }
-
 @Preview(
     name = "Desktop • Dark",
     widthDp = 1440,
