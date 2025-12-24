@@ -87,13 +87,12 @@ fun UserHeader(){
                 Box(
                     modifier = Modifier.offset(x = -Spacing.s1).size(Spacing.s2)
                         .background(
-                        MaterialTheme.appColors.lightBlue,
+                            MaterialTheme.appColors.primary,
                         CircleShape
                     ).align(Alignment.TopEnd).padding(Spacing.s1),
 
                     )
             }
-
 
 
         }
