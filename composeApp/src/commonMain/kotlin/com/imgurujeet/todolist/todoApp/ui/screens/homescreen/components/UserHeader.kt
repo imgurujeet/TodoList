@@ -65,11 +65,15 @@ fun UserHeader(){
             ){
                 Text(
                     text = "Hello!",
-                    style = MaterialTheme.typography.titleSmall )
+                    style = MaterialTheme.typography.titleSmall
+                    .copy(color = MaterialTheme.colorScheme.onBackground)
+                )
 
                 Text(
                     text = "User Name",
-                    style = MaterialTheme.typography.titleMedium )
+                    style = MaterialTheme.typography.titleMedium
+                        .copy(color = MaterialTheme.colorScheme.onBackground)
+                )
             }
 
         }

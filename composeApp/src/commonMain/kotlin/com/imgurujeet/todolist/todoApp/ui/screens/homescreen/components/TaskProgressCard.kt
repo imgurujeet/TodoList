@@ -3,6 +3,7 @@ package com.imgurujeet.todolist.todoApp.ui.screens.homescreen.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.imgurujeet.todolist.todoApp.ui.components.CurvedButton
 import com.imgurujeet.todolist.todoApp.ui.components.CurvedButtonConfig
 import com.imgurujeet.todolist.todoApp.ui.theme.BodyXLarge
@@ -31,12 +34,18 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun TaskProgressCard(){
-    Box(
+    BoxWithConstraints(
         modifier = Modifier.fillMaxWidth()
             .clip(RoundedCornerShape(Spacing.s6))
             .background(MaterialTheme.appColors.primary)
             .padding(Spacing.s6)
     ){
+
+        val maxButtonWidth = when {
+            maxWidth < 600.dp -> maxWidth              // Phone
+            maxWidth < 840.dp -> 420.dp               // Tablet
+            else -> 360.dp                            // Laptop / Desktop
+        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -63,7 +72,11 @@ fun TaskProgressCard(){
                         contentColor = MaterialTheme.appColors.primary,
                         shouldShowArrow = true
 
-                    )
+                    ),
+                    modifier = Modifier
+                        .widthIn(max = maxButtonWidth)
+                        .fillMaxWidth(),
+
                 )
 
             }

@@ -11,9 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.imgurujeet.todolist.todoApp.ui.screens.OnBoardingScreen
 import com.imgurujeet.todolist.todoApp.ui.screens.TodoBackgroundScreen
+import com.imgurujeet.todolist.todoApp.ui.screens.homescreen.HomeScreen
 
 @Composable
-fun AppNavHost(startDestination: NavRoute= NavRoute.OnBoardingScreen, navController: NavHostController)  {
+fun AppNavHost(startDestination: NavRoute= NavRoute.HomeScreen, navController: NavHostController)  {
 
     NavHost(
         navController = navController,
@@ -21,12 +22,12 @@ fun AppNavHost(startDestination: NavRoute= NavRoute.OnBoardingScreen, navControl
     ){
         composable<NavRoute.OnBoardingScreen> {
             OnBoardingScreen()
-
         }
         composable<NavRoute.DashBoard> {
-
         }
-        composable<NavRoute.HomeScreen> {  }
+        composable<NavRoute.HomeScreen> {
+            HomeScreen()
+        }
         composable<NavRoute.TodoList> {  }
 
     }
