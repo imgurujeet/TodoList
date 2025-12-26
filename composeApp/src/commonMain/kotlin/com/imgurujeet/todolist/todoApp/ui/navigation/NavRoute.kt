@@ -21,5 +21,11 @@ sealed class NavRoute{
     @Serializable
     data object TodoList : NavRoute()
 
+    @Serializable
+    data object TaskScreen : NavRoute()
+
+    @Serializable
+    data object Profile : NavRoute()
+
 }
 

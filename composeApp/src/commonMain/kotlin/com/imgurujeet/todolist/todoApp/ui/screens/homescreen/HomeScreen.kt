@@ -9,13 +9,15 @@ import com.imgurujeet.todolist.todoApp.ui.screens.homescreen.components.UserHead
 @Composable
 fun HomeScreen(){
 
-    Scaffold (
-    ){
-        TodoBackgroundScreen {
-            HomePageContent()
-
-        }
+    TodoBackgroundScreen {
+        HomePageContent()
 
     }
+
+//    Scaffold (
+//    ){
+//
+//
+//    }
 
 }

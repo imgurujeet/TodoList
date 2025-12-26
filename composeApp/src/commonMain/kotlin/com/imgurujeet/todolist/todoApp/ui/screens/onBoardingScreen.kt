@@ -34,7 +34,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.imgurujeet.todolist.todoApp.ui.components.CustomButton
+import com.imgurujeet.todolist.todoApp.ui.navigation.NavRoute
 import com.imgurujeet.todolist.todoApp.ui.theme.AppColors
 import com.imgurujeet.todolist.todoApp.ui.theme.TodoAppTheme
 import com.imgurujeet.todolist.todoApp.ui.theme.TodoPreview
@@ -52,7 +55,9 @@ import todolist.composeapp.generated.resources.pie_chart
 import todolist.composeapp.generated.resources.smartphone_notification
 
 @Composable
-fun OnBoardingScreen(){
+fun OnBoardingScreen(
+     onClick : () -> Unit
+){
 
     TodoBackgroundScreen(
         shouldShowDotsAndIcons = true
@@ -142,7 +147,9 @@ fun OnBoardingScreen(){
                     Spacer(modifier = Modifier.height(32.dp))
 
                     CustomButton(
-                        onClick = {},
+                        onClick = {
+                            onClick()
+                        },
                         text = "Let's Start",
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -342,70 +349,70 @@ fun BlurredCircles(
 
 
 
-@Preview(name = "Light", showBackground = true)
-@Composable
-fun TodoBackgroundLightPreview() {
-    TodoPreview {
-        OnBoardingScreen()
-    }
-}
-
-@Preview(name = "Dark", showBackground = true)
-@Composable
-fun TodoBackgroundDarkPreview() {
-    TodoPreview(darkTheme = true) {
-        OnBoardingScreen()
-    }
-}
-
-@Preview(
-    name = "Tablet",
-    widthDp = 800,
-    heightDp = 1280,
-    showBackground = true
-)
-@Composable
-fun TabletPreview() {
-    TodoPreview {
-        OnBoardingScreen()
-    }
-}
-
-@Preview(
-    name = "Tablet • Dark",
-    widthDp = 800,
-    heightDp = 1280,
-    showBackground = true
-)
-@Composable
-fun TabletDarkPreview() {
-    TodoPreview(darkTheme = true) {
-        OnBoardingScreen()
-    }
-}
-
-@Preview(
-    name = "Desktop",
-    widthDp = 1440,
-    heightDp = 900,
-    showBackground = true
-)
-@Composable
-fun DesktopPreview() {
-    TodoPreview {
-        OnBoardingScreen()
-    }
-}
-@Preview(
-    name = "Desktop • Dark",
-    widthDp = 1440,
-    heightDp = 900,
-    showBackground = true
-)
-@Composable
-fun DesktopDarkPreview() {
-    TodoPreview(darkTheme = true) {
-        OnBoardingScreen()
-    }
-}
+//@Preview(name = "Light", showBackground = true)
+//@Composable
+//fun TodoBackgroundLightPreview() {
+//    TodoPreview {
+//        OnBoardingScreen()
+//    }
+//}
+//
+//@Preview(name = "Dark", showBackground = true)
+//@Composable
+//fun TodoBackgroundDarkPreview() {
+//    TodoPreview(darkTheme = true) {
+//        OnBoardingScreen()
+//    }
+//}
+//
+//@Preview(
+//    name = "Tablet",
+//    widthDp = 800,
+//    heightDp = 1280,
+//    showBackground = true
+//)
+//@Composable
+//fun TabletPreview() {
+//    TodoPreview {
+//        OnBoardingScreen()
+//    }
+//}
+//
+//@Preview(
+//    name = "Tablet • Dark",
+//    widthDp = 800,
+//    heightDp = 1280,
+//    showBackground = true
+//)
+//@Composable
+//fun TabletDarkPreview() {
+//    TodoPreview(darkTheme = true) {
+//        OnBoardingScreen()
+//    }
+//}
+//
+//@Preview(
+//    name = "Desktop",
+//    widthDp = 1440,
+//    heightDp = 900,
+//    showBackground = true
+//)
+//@Composable
+//fun DesktopPreview() {
+//    TodoPreview {
+//        OnBoardingScreen()
+//    }
+//}
+//@Preview(
+//    name = "Desktop • Dark",
+//    widthDp = 1440,
+//    heightDp = 900,
+//    showBackground = true
+//)
+//@Composable
+//fun DesktopDarkPreview() {
+//    TodoPreview(darkTheme = true) {
+//        OnBoardingScreen()
+//    }
+//}
 

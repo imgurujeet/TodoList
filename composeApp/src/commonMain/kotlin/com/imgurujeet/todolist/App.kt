@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.imgurujeet.todolist.todoApp.ui.navigation.AppNavHost
+import com.imgurujeet.todolist.todoApp.ui.navigation.RootNav
 import com.imgurujeet.todolist.todoApp.ui.theme.TodoAppTheme
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -28,9 +29,7 @@ fun App() {
     initKoin()
     TodoAppTheme {
 
-        val navController = rememberNavController()
-
-        AppNavHost(navController = navController)
+        RootNav()
 
     }
 }
