@@ -77,6 +77,9 @@ kotlin {
             //navigation
             implementation(libs.navigation.compose)
 
+            //calender
+            implementation(libs.compose.multiplatform.calender)
+
 
 
 

@@ -25,6 +25,9 @@ sealed class NavRoute{
     data object TaskScreen : NavRoute()
 
     @Serializable
+    data object NotesScreen : NavRoute()
+
+    @Serializable
     data object Profile : NavRoute()
 
 }
