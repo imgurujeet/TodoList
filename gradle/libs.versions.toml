@@ -22,6 +22,7 @@ sqlite = "2.6.2"
 ksp = "2.2.10-2.0.2"
 koin-compose = "4.1.1"
 cmp-calender = "2.9.0"
+compottie = "2.0.2"
 
 
 [libraries]
@@ -48,6 +49,9 @@ androidx-room-sqlite-wrapper = { module = "androidx.room:room-sqlite-wrapper", v
 navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 #third party calender library
 compose-multiplatform-calender ={module=  "com.kizitonwose.calendar:compose-multiplatform", version.ref = "cmp-calender" }
+#lottie Animation
+compottie-lite = { module = "io.github.alexzhirkevich:compottie-lite", version.ref = "compottie" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

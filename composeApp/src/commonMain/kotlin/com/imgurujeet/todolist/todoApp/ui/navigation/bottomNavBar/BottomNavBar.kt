@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -18,11 +19,17 @@ import org.jetbrains.compose.resources.painterResource
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.imgurujeet.todolist.todoApp.ui.components.AnimatedNavIcon
 import com.imgurujeet.todolist.todoApp.ui.screens.TodoBackgroundScreen
 import com.imgurujeet.todolist.todoApp.ui.theme.appColors
 
@@ -31,6 +38,7 @@ import com.imgurujeet.todolist.todoApp.ui.theme.appColors
 fun BottomNavBar(navHost: NavHostController) {
 
     val colors = MaterialTheme.appColors
+
 
     val items = listOf(
         BottomNavItems.HomeScreen,
@@ -80,11 +88,21 @@ fun BottomNavBar(navHost: NavHostController) {
                 currentDestination?.hierarchy?.any {
                     it.route == screen.route::class.qualifiedName
                 } == true
+            val iconHighLightStroke =
+                MaterialTheme.appColors.primary.copy(alpha = 0.4f)
+
 
             NavigationBarItem(
                 icon = {
-                    Icon(painterResource(screen.iconRes), contentDescription = null)
+                    AnimatedNavIcon(
+                        lottieFile = screen.iconRes,
+                        isSelected = isSelected,
+                        animatedColor = MaterialTheme.appColors.primary,
+                        staticColor = MaterialTheme.appColors.onSoftCyan,
+                    )
                 },
+
+
                 label = {
                     Text(
                         text = screen.title,
@@ -105,12 +123,48 @@ fun BottomNavBar(navHost: NavHostController) {
                 }
                 ,
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = MaterialTheme.appColors.primary.copy(alpha = 0.2f),
-                    selectedIconColor = MaterialTheme.appColors.primary,
+                    indicatorColor = Color.Transparent,
                     selectedTextColor = MaterialTheme.appColors.primary,
-                   unselectedIconColor = MaterialTheme.appColors.onSoftCyan.copy(alpha = 0.4f),
                     unselectedTextColor = MaterialTheme.appColors.onSoftCyan.copy(alpha = 0.8f)
-                )
+                ),
+
+
+
+                modifier = Modifier.drawBehind {
+
+                    if (!isSelected) return@drawBehind
+
+                    val startX = 30f
+                    val endX = size.width-30f
+                    val centerX = size.width / 2f
+
+                    val topY = 0f
+                    val maxDepth = 6.dp.toPx()       // how far light goes down
+                    val maxSpread = 8.dp.toPx()      // how wide it spreads
+
+                    // ---- LIGHT CONE (FAKE BLUR) ----
+                    repeat(20) { i ->
+                        val progress = (i + 1) / 7f
+
+                        val spread = maxSpread * progress
+                        val depth = maxDepth * progress
+
+                        val path = Path().apply {
+                            moveTo(startX, topY)
+                            lineTo(endX, topY)
+                            lineTo(centerX + spread / 1f, depth)
+                            lineTo(centerX - spread / 1f, depth)
+                            close()
+                        }
+
+                        drawPath(
+                            path = path,
+                            color = iconHighLightStroke.copy(
+                                alpha = 0.3f * (1f - progress)
+                            )
+                        )
+                    }
+                }
 
             )
 
@@ -176,11 +230,16 @@ fun SideNavRail(navController: NavHostController) {
                     currentDestination?.hierarchy?.any {
                         it.route == screen.route::class.qualifiedName
                     } == true
+                val iconHighLightStroke =
+                    MaterialTheme.appColors.primary.copy(alpha = 0.4f)
+
                 NavigationRailItem(
                     icon = {
-                        Icon(
-                            painterResource(screen.iconRes),
-                            contentDescription = screen.title
+                        AnimatedNavIcon(
+                            lottieFile = screen.iconRes,
+                            isSelected = isSelected,
+                            animatedColor = MaterialTheme.appColors.primary,
+                            staticColor = MaterialTheme.appColors.onSoftCyan
                         )
                     },
                     label = {
@@ -202,12 +261,54 @@ fun SideNavRail(navController: NavHostController) {
                     },
 
                     colors = NavigationRailItemDefaults.colors(
-                        indicatorColor = MaterialTheme.appColors.primary.copy(alpha = 0.2f),
-                        selectedIconColor = MaterialTheme.appColors.primary,
-                        selectedTextColor = MaterialTheme.appColors.primary,
-                        unselectedIconColor = MaterialTheme.appColors.onSoftCyan.copy(alpha = 0.4f),
-                        unselectedTextColor = MaterialTheme.appColors.onSoftCyan.copy(alpha = 0.8f)
-                    )
+                        indicatorColor = Color.Transparent,
+                    ),
+
+
+                    modifier = Modifier.drawBehind {
+
+                        if (!isSelected) return@drawBehind
+
+                        // ---- SOURCE LINE (VERTICAL) ----
+                        val sourceX = size.width                    // light starts from LEFT edge
+                        val startY = 0f                     // top cut (narrow source)
+                        val endY = size.height - 40f         // bottom cut
+                        val centerY = (startY + endY) / 2f
+
+                        // ---- LIGHT PROPERTIES ----
+                        val maxDepth = 6.dp.toPx()           // how far light goes RIGHT
+                        val maxSpread = 8.dp.toPx()         // how tall the spread becomes
+
+                        // ---- LIGHT CONE (TRAPEZIUM) ----
+                        repeat(20) { i ->
+                            val progress = (i + 1) / 7f     // smooth falloff
+
+                            val depth = maxDepth * progress
+                            val spread = maxSpread * progress
+
+                            val path = Path().apply {
+                                moveTo(sourceX, startY)
+                                lineTo(sourceX, endY)
+
+                                // Bottom-right
+                                lineTo(sourceX -depth, centerY + spread / 2f)
+
+                                // Top-right
+                                lineTo(sourceX-depth, centerY - spread / 2f)
+
+                                close()
+                            }
+
+                            drawPath(
+                                path = path,
+                                color = iconHighLightStroke.copy(
+                                    alpha = 0.25f * (1f - progress) // fade outward
+                                )
+                            )
+                        }
+                    }
+
+
 
                 )
             }
