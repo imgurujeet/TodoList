@@ -32,3 +32,17 @@ sealed class NavRoute{
 
 }
 
+
+val NavRoute.routeString: String
+    get() = when (this) {
+        NavRoute.SplashScreen -> "splash"
+        NavRoute.OnBoardingScreen -> "onboarding"
+        NavRoute.DashBoard -> "dashboard"
+        NavRoute.HomeScreen -> "home"
+        NavRoute.TodoList -> "todo"
+        NavRoute.TaskScreen -> "task"
+        NavRoute.NotesScreen -> "notes"
+        NavRoute.Profile -> "profile"
+    }
+
+

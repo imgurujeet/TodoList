@@ -80,6 +80,10 @@ kotlin {
             //calender
             implementation(libs.compose.multiplatform.calender)
 
+            //lottie animation
+            implementation(libs.compottie.lite)
+
+
 
 
 
