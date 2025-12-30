@@ -77,32 +77,47 @@ fun UserHeader(){
             }
 
         }
-        Box(
-            modifier = Modifier.size(Spacing.s6)
+       NotificationIcon()
 
-        ){
-            Icon(
-                painter = painterResource(Res.drawable.notification),
-                contentDescription = null,
-                modifier = Modifier.size(Spacing.s14),
-                tint = MaterialTheme.colorScheme.onBackground
-            )
-            if(shouldShowNotificationDot){
-                Box(
-                    modifier = Modifier.offset(x = -Spacing.s1).size(Spacing.s2)
-                        .background(
-                            MaterialTheme.appColors.primary,
+
+    }
+}
+
+
+
+
+
+
+
+@Composable
+fun NotificationIcon(){
+    val shouldShowNotificationDot by remember { mutableStateOf(true) }
+
+
+    Box(
+        modifier = Modifier.size(Spacing.s6)
+
+    ){
+        Icon(
+            painter = painterResource(Res.drawable.notification),
+            contentDescription = null,
+            modifier = Modifier.size(Spacing.s14),
+            tint = MaterialTheme.colorScheme.onBackground
+        )
+        if(shouldShowNotificationDot){
+            Box(
+                modifier = Modifier.offset(x = -Spacing.s1).size(Spacing.s2)
+                    .background(
+                        MaterialTheme.appColors.primary,
                         CircleShape
                     ).align(Alignment.TopEnd).padding(Spacing.s1),
 
-                    )
-            }
-
-
+                )
         }
 
 
     }
+
 }
 
 
